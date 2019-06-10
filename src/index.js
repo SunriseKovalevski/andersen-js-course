@@ -26,12 +26,13 @@ import { task7Old, task7New } from './es-features/task7';
 import { task8Old, task8New } from './es-features/task8';
 import { task9Old, task9New, task9New1 } from './es-features/task9';
 import { task10Old, task10New } from './es-features/task10';
-import { any } from './array-practice/task1';
-import { arrayDiff } from './array-practice/task2';
-import { forEachRight } from './array-practice/task3';
-import { union } from './array-practice/task4';
-import { generator } from './array-practice/task5';
-import { indexOfAll } from './array-practice/task9';
+import any from './array-practice/task1';
+import arrayDiff from './array-practice/task2';
+import forEachRight from './array-practice/task3';
+import union from './array-practice/task4';
+import generator from './array-practice/task5';
+import without from './array-practice/task8';
+import indexOfAll from './array-practice/task9';
 
 console.log('task1 old', task1Old(10) === 500); // true
 console.log('task1 new', task1New(10) === 500); // true
@@ -112,5 +113,10 @@ console.log('generator', generator.next());
 console.log('=============');
 
 console.log('indexOfAll', indexOfAll([1, 2, 3, 1, 2, 3], 1));
+
+console.log('=============');
+
+console.log('without', without([2, 1, 2, 3], 1, 2));
+console.log('without', without([2, 1, 10, 20], 1, 2));
 
 console.log('=============');

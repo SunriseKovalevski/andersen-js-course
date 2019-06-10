@@ -22,4 +22,6 @@ const createGenerator = arr => {
     },
   };
 };
-export const generator = createGenerator([1, '6', 3, 2]);
+const generator = createGenerator([1, '6', 3, 2]);
+
+export default generator;
