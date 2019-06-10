@@ -102,6 +102,7 @@ console.log('forEachRight', forEachRight([1, 2, 3, 4], val => console.log(val)))
 console.log('=============');
 
 console.log('union', union([5, 1, 2, 3, 3], [4, 3, 2]));
+console.log('union', union([5, 1, 3, 3, 4], [1, 3, 4]));
 
 console.log('=============');
 
@@ -113,16 +114,6 @@ console.log('generator', generator.next());
 console.log('generator', generator.next());
 
 console.log('=============');
-
-console.log('indexOfAll', indexOfAll([1, 2, 3, 1, 2, 3], 1));
-
-console.log('=============');
-
-console.log('without', without([2, 1, 2, 3], 1, 2));
-console.log('without', without([2, 1, 10, 20], 1, 2));
-
-console.log('=============');
-
 console.log(
   'transformArrayToNumber',
   transformArrayToNumber([10, 20, 30], (acc, item) => acc + item)
@@ -145,5 +136,15 @@ console.log('=============');
 
 console.log('take', take([1, 2, 3], 5));
 console.log('take', take([1, 2, 3], 2));
+
+console.log('=============');
+
+console.log('without', without([2, 1, 2, 3], 1, 2));
+console.log('without', without([2, 1, 10, 20], 1, 2));
+
+console.log('=============');
+
+console.log('indexOfAll', indexOfAll([1, 2, 3, 1, 2, 3], 1));
+console.log('indexOfAll', indexOfAll([1, 2, 3], 4));
 
 console.log('=============');
