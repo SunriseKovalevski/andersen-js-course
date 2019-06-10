@@ -31,6 +31,7 @@ import { arrayDiff } from './array-practice/task2';
 import { forEachRight } from './array-practice/task3';
 import { union } from './array-practice/task4';
 import { generator } from './array-practice/task5';
+import { indexOfAll } from './array-practice/task9';
 
 console.log('task1 old', task1Old(10) === 500); // true
 console.log('task1 new', task1New(10) === 500); // true
@@ -107,5 +108,9 @@ console.log('generator', generator.next());
 console.log('generator', generator.next());
 console.log('generator', generator.next());
 console.log('generator', generator.next());
+
+console.log('=============');
+
+console.log('indexOfAll', indexOfAll([1, 2, 3, 1, 2, 3], 1));
 
 console.log('=============');
