@@ -27,6 +27,7 @@ import { task8Old, task8New } from './es-features/task8';
 import { task9Old, task9New, task9New1 } from './es-features/task9';
 import { task10Old, task10New } from './es-features/task10';
 import { any } from './array-practice/task1';
+import { arrayDiff } from './array-practice/task2';
 
 console.log('task1 old', task1Old(10) === 500); // true
 console.log('task1 new', task1New(10) === 500); // true
@@ -81,5 +82,10 @@ console.log('task10 new', task10New()); // {name: 'Max', age: 12, color: red}
 console.log('=============');
 
 console.log('any', any([0, 1, 2, 0], x => x >= 2)); // -> true
+
+console.log('=============');
+
+console.log('arrayDiff', arrayDiff([1, 2, 3], [1, 2, 4])); //  [3, 4]
+console.log('arrayDiff', arrayDiff([1, 3, 3, 4], [1, 3, '4']));
 
 console.log('=============');
