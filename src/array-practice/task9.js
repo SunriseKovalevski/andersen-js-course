@@ -10,3 +10,7 @@
  * console.log(indexOfAll([1, 2, 3, 1, 2, 3], 1)); -> [0, 3]
  * console.log(indexOfAll([1, 2, 3], 4)); -> []
  */
+const indexOfAll = (arr, value) =>
+  arr.map((item, i) => (item === value ? i : false)).filter(item => item !== false);
+
+export default indexOfAll;
