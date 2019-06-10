@@ -8,6 +8,8 @@
  * console.log(union([5, 1, 3, 3, 4], [1, 3, 4])); -> [5, 1, 3, 4]
  */
 
-export const union = (arr1, arr2) => {
+const union = (arr1, arr2) => {
   return [...new Set([...arr1, ...arr2])];
 };
+
+export default union;

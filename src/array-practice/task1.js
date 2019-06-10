@@ -15,4 +15,6 @@
  * console.log(any([0, 0, 0, 0])); -> false
  */
 
-export const any = (array, cb) => array.some(cb);
+const any = (array, cb) => array.some(cb);
+
+export default any;

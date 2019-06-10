@@ -10,8 +10,10 @@
  * forEachRight([1, 2, 3, 4], val => console.log(val)); -> в консоль 4 3 2 1
  */
 
-export const forEachRight = (array, cb) =>
+const forEachRight = (array, cb) =>
   array
     .reverse()
     .slice()
     .forEach(cb);
+
+export default forEachRight;
