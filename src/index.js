@@ -31,6 +31,7 @@ import arrayDiff from './array-practice/task2';
 import forEachRight from './array-practice/task3';
 import union from './array-practice/task4';
 import generator from './array-practice/task5';
+import transformArrayToNumber from './array-practice/task6';
 import without from './array-practice/task8';
 import indexOfAll from './array-practice/task9';
 
@@ -118,5 +119,25 @@ console.log('=============');
 
 console.log('without', without([2, 1, 2, 3], 1, 2));
 console.log('without', without([2, 1, 10, 20], 1, 2));
+
+console.log('=============');
+
+console.log(
+  'transformArrayToNumber',
+  transformArrayToNumber([10, 20, 30], (acc, item) => acc + item)
+); // 60
+console.log(
+  'transformArrayToNumber',
+  transformArrayToNumber([10, 20, 30], (acc, item) => acc + item, 10)
+); // 70
+console.log(
+  'transformArrayToNumber',
+  transformArrayToNumber([10, 20, 30], (acc, item) => acc * item)
+); // 0
+
+console.log(
+  'transformArrayToNumber',
+  transformArrayToNumber([10, 20, 30], (acc, item) => acc - item)
+);
 
 console.log('=============');
