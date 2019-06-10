@@ -24,7 +24,7 @@ import { task5Old, task5New, task5New1 } from './es-features/task5';
 import { task6Old, task6New } from './es-features/task6';
 import { task7Old, task7New } from './es-features/task7';
 import { task8Old, task8New } from './es-features/task8';
-import { task9Old, task9New } from './es-features/task9';
+import { task9Old, task9New, task9New1 } from './es-features/task9';
 import { task10Old, task10New } from './es-features/task10';
 
 console.log('task1 old', task1Old(10) === 500); // true
@@ -70,6 +70,7 @@ console.log('=============');
 
 console.log('task9 old', task9Old()); // [true, 1]
 console.log('task9 new', task9New()); // [true, 1]
+console.log('task9 new 1', task9New1()); // [true, 1]
 
 console.log('=============');
 

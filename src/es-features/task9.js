@@ -19,6 +19,13 @@ export function task9Old() {
 
 export const task9New = () => {
   const result = 'test'.indexOf('est') !== -1;
-  const findResult = [22, 1, 90, 70].filter(x => x < 3)[0];
+  const [findResult] = [22, 1, 90, 70].filter(x => x < 3);
   return [result, findResult];
+};
+
+export const task9New1 = () => {
+  const result = ~'test'.indexOf('est');
+  const [findResult] = [22, 1, 90, 70].filter(x => x < 3);
+
+  return [!!result, findResult];
 };
