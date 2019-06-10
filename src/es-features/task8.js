@@ -32,9 +32,7 @@ export const task8New = () => {
   const obj = {
     nums: [0, 2, 5, 10, 15],
     fives: [],
-    calculateNumsFive: () => {
-      return obj.nums.filter(v => v % 5 === 0);
-    },
+    calculateNumsFive: () => obj.nums.filter(v => v % 5 === 0),
   };
   return obj.calculateNumsFive();
 };
