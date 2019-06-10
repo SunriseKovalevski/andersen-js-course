@@ -32,16 +32,18 @@ export function task4Old() {
 
 export const task4New = () => {
   const x = 10;
-  const y = 10;
-  const obj = {
-    x: x,
-    y: y,
-    bar: () => x + y,
+  const y = 20;
+
+  function foo() {
+    return 'test';
+  }
+
+  return {
+    x,
+    y,
+    bar() {
+      return this.x + this.y;
+    },
+    ['baz' + foo()]: 'new field',
   };
-
-  const foo = () => 'test';
-
-  obj['baz' + foo()] = 'new field';
-
-  return obj;
 };
