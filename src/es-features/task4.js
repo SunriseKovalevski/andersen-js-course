@@ -31,9 +31,9 @@ export function task4Old() {
 // При желании, можете использовать стрелочную функцию, вместо обычной
 
 export const task4New = () => {
-  let x = 10;
-  let y = 10;
-  let obj = {
+  const x = 10;
+  const y = 10;
+  const obj = {
     x: x,
     y: y,
     bar: () => x + y,
