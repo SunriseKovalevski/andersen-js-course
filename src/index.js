@@ -1,4 +1,9 @@
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 import './styles/main.css';
+import Model from './model';
+import View from './view';
+import Controller from './controller';
 
-console.log('Hi');
+const model = new Model();
+const view = new View();
+const controller = new Controller(model, view);
