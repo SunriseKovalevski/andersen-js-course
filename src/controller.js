@@ -3,40 +3,20 @@ class Controller {
     this.model = model;
     this.view = view;
 
-    view.on('add', this.addItem.bind(this));
-    view.on('toggle', this.toggleItem.bind(this));
-    view.on('edit', this.editItem.bind(this));
-    view.on('remove', this.removeItem.bind(this));
+    view.on('craftItem', this.craftItem.bind(this));
 
-    view.show(model.items);
+    view.on('delete', this.deleteElement.bind(this));
+    view.show(model.items, model.recipes);
   }
 
-  addItem(title) {
-    const item = this.model.addItem({
-      id: Date.now(),
-      title,
-      completed: false,
-    });
-
-    this.view.addItem(item);
+  deleteElement(ev) {
+    this.model.deleteElement(ev);
+    this.view.deleteElement(ev);
   }
 
-  toggleItem({ id, completed }) {
-    const item = this.model.updateItem(id, { completed });
-
-    this.view.toggleItem(item);
-  }
-
-  editItem({ id, title }) {
-    const item = this.model.updateItem(id, { title });
-
-    this.view.editItem(item);
-  }
-
-  removeItem(id) {
-    this.model.removeItem(id);
-    this.view.removeItem(id);
+  craftItem({ recipe, items }) {
+    const item = this.model.craftItem(recipe.id, Array.from(items).map(value => value.id));
+    this.view.craftItem(item);
   }
 }
-
 export default Controller;
