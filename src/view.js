@@ -1,145 +1,77 @@
-/* eslint-disable prefer-destructuring */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/named */
 /* eslint-disable no-alert */
-import { EventEmitter, createElement } from './helpers';
+import { drop, allowDrop, findFreeCell, createListItem } from './helpers';
+import EventEmitter from './EventEmitter';
 
 class View extends EventEmitter {
   constructor() {
     super();
-
-    this.inventory = document.getElementById('inventory');
-    this.image = document.getElementById('imvImgCell');
-    this.inventoryTable = document.getElementById('inventoryTable');
-
-    this.inventory.addEventListener('submit', this.handleAdd.bind(this));
+    this.buttonItem = document.getElementById('buttonItem');
+    this.listItems = document.getElementsByClassName('itemCell');
+    this.listRecipes = document.getElementsByClassName('recipeCell');
+    this.listCraft = document.getElementsByClassName('craftCell');
+    this.trashcan = document.querySelector('img');
+    this.addEventsListener();
   }
 
-  createListItem(todo) {
-    const checkbox = createElement('input', {
-      type: 'checkbox',
-      className: 'checkbox',
-      checked: todo.completed ? 'checked' : '',
-    });
-    const label = createElement('label', { className: 'title' }, todo.title);
-    const editInput = createElement('input', { type: 'text', className: 'textfield' });
-    const editButton = createElement('button', { className: 'edit' }, 'Изменить');
-    const deleteButton = createElement('button', { className: 'remove' }, 'Удалить');
-    const item = createElement(
-      'li',
-      { className: `todo-item${todo.completed ? ' completed' : ''}`, 'data-id': todo.id },
-      checkbox,
-      label,
-      editInput,
-      editButton,
-      deleteButton
-    );
-
-    return this.addEventListeners(item);
-  }
-
-  addEventListeners(item) {
-    const checkbox = item.querySelector('.checkbox');
-    const editButton = item.querySelector('button.edit');
-    const removeButton = item.querySelector('button.remove');
-
-    checkbox.addEventListener('change', this.handleToggle.bind(this));
-    editButton.addEventListener('click', this.handleEdit.bind(this));
-    removeButton.addEventListener('click', this.handleRemove.bind(this));
-
-    return item;
-  }
-
-  findListItem(id) {
-    return this.list.querySelector(`[data-id="${id}"]`);
-  }
-
-  // eslint-disable-next-line consistent-return
-  handleAdd(event) {
-    event.preventDefault();
-
-    if (!this.input.value) return alert('Необходимо ввести название задачи.');
-
-    const value = this.input.value;
-
-    this.emit('add', value);
-  }
-
-  handleToggle({ target }) {
-    const listItem = target.parentNode;
-    const id = listItem.getAttribute('data-id');
-    const completed = target.checked;
-
-    this.emit('toggle', { id, completed });
-  }
-
-  handleEdit({ target }) {
-    const listItem = target.parentNode;
-    const id = listItem.getAttribute('data-id');
-    const label = listItem.querySelector('.title');
-    const input = listItem.querySelector('.textfield');
-    const editButton = listItem.querySelector('button.edit');
-    const title = input.value;
-    const isEditing = listItem.classList.contains('editing');
-
-    if (isEditing) {
-      this.emit('edit', { id, title });
-    } else {
-      input.value = label.textContent;
-      editButton.textContent = 'Сохранить';
-      listItem.classList.add('editing');
+  craftItem(item) {
+    if (item === null) alert('Ингридиенты подобраны неверно');
+    else {
+      const newItem = createListItem(item);
+      newItem.className = 'item';
+      findFreeCell(this.listItems).appendChild(newItem);
     }
   }
 
-  handleRemove({ target }) {
-    const listItem = target.parentNode;
-
-    this.emit('remove', listItem.getAttribute('data-id'));
+  craftItemHandler() {
+    const recipe = document.querySelector('.craftCell p[class = "recipe"]');
+    const items = document.querySelectorAll('.craftCell p[class = "item"]');
+    if (recipe && items) this.emit('craftItem', { recipe, items });
+    else alert('Невозможно создать предмет');
   }
 
-  show(todos) {
-    todos.forEach(todo => {
-      const listItem = this.createListItem(todo);
+  deleteHandler(ev) {
+    ev.preventDefault();
+    this.emit('delete', ev);
+  }
 
-      this.list.appendChild(listItem);
+  // eslint-disable-next-line class-methods-use-this
+  deleteElement(ev) {
+    const data = ev.dataTransfer.getData('text');
+    document.getElementById(data).parentElement.removeChild(document.getElementById(data));
+  }
+
+  addEventsListener() {
+    this.buttonItem.addEventListener('click', this.craftItemHandler.bind(this));
+    this.trashcan.addEventListener('drop', this.deleteHandler.bind(this));
+    this.trashcan.addEventListener('dragover', allowDrop);
+    Array.from(this.listItems).forEach(cell => {
+      cell.addEventListener('drop', drop);
+      cell.addEventListener('dragover', allowDrop);
+    });
+    Array.from(this.listRecipes).forEach(cell => {
+      cell.addEventListener('drop', drop);
+      cell.addEventListener('dragover', allowDrop);
+    });
+    Array.from(this.listCraft).forEach(cell => {
+      cell.addEventListener('drop', drop);
+      cell.addEventListener('dragover', allowDrop);
     });
   }
 
-  addItem(todo) {
-    const listItem = this.createListItem(todo);
-
-    this.input.value = '';
-    this.list.appendChild(listItem);
-  }
-
-  toggleItem(todo) {
-    const listItem = this.findListItem(todo.id);
-    const checkbox = listItem.querySelector('.checkbox');
-
-    checkbox.checked = todo.completed;
-
-    if (todo.completed) {
-      listItem.classList.add('completed');
-    } else {
-      listItem.classList.remove('completed');
-    }
-  }
-
-  editItem(todo) {
-    const listItem = this.findListItem(todo.id);
-    const label = listItem.querySelector('.title');
-    // eslint-disable-next-line no-unused-vars
-    const input = listItem.querySelector('.textfield');
-    const editButton = listItem.querySelector('button.edit');
-
-    label.textContent = todo.title;
-    editButton.textContent = 'Изменить';
-    listItem.classList.remove('editing');
-  }
-
-  removeItem(id) {
-    const listItem = this.findListItem(id);
-
-    this.list.removeChild(listItem);
+  show(items, recipes) {
+    items.forEach(item => {
+      const listItem = createListItem(item);
+      listItem.className = 'item';
+      findFreeCell(this.listItems).appendChild(listItem);
+    });
+    recipes.forEach(recipe => {
+      const listRecipe = createListItem(recipe);
+      listRecipe.className = 'recipe';
+      listRecipe.setAttribute('info', recipe.ingredients.toString());
+      findFreeCell(this.listRecipes).appendChild(listRecipe);
+    });
   }
 }
-
 export default View;
