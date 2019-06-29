@@ -14,7 +14,7 @@
       </h1>
     </header>
     <main>
-      <div class="hc">
+      <div id="hc">
         <table border="1" cellpadding="20">
           <tr>
             <td><div class="hcCell"></div></td>
@@ -32,16 +32,50 @@
             <td><div class="hcCell"></div></td>
           </tr>
         </table>
+
+        <button id="craft-button" type="submit">Craft</button>
       </div>
-      <div class="inventory">
-        <table border="1" cellpadding="20">
+      <div id="inventory">
+        <table id="inventoryTable" border="1" cellpadding="20">
           <tr>
-            <td><div class="inventoryCell"></div></td>
-            <td><div class="inventoryCell"></div></td>
-            <td><div class="inventoryCell"></div></td>
-            <td><div class="inventoryCell"></div></td>
-            <td><div class="inventoryCell"></div></td>
-            <td><div class="inventoryCell"></div></td>
+            <td>
+              <div class="inventoryCell">
+                <button id="add-button" type="submit">
+                  <img id="imvImgCell" src="../src/img/cell.png" />
+                  +
+                </button>
+              </div>
+            </td>
+            <td>
+              <div id="imvImgCell" class="inventoryCell">
+                <img src="../src/img/cell.png" />
+                <button id="add-button" type="submit">+</button>
+              </div>
+            </td>
+            <td>
+              <div id="imvImgCell" class="inventoryCell">
+                <img src="../src/img/cell.png" />
+                <button id="add-button" type="submit">+</button>
+              </div>
+            </td>
+            <td>
+              <div class="inventoryCell">
+                <img src="../src/img/cell.png" />
+                <button id="add-button" type="submit">+</button>
+              </div>
+            </td>
+            <td>
+              <div class="inventoryCell">
+                <img src="../src/img/cell.png" />
+                <button id="add-button" type="submit">+</button>
+              </div>
+            </td>
+            <td>
+              <div class="inventoryCell">
+                <img src="../src/img/cell.png" />
+                <button id="add-button" type="submit">+</button>
+              </div>
+            </td>
           </tr>
           <tr>
             <td><div class="inventoryCell"></div></td>
