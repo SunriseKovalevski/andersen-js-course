@@ -1,40 +1,27 @@
-/* eslint-disable no-param-reassign */
-function createElement(tag, props, ...children) {
-  const element = document.createElement(tag);
-
-  Object.keys(props).forEach(key => {
-    if (key.startsWith('data-')) {
-      element.setAttribute(key, props[key]);
-    } else {
-      element[key] = props[key];
-    }
-  });
-
-  children.forEach(child => {
-    if (typeof child === 'string') {
-      child = document.createTextNode(child);
-    }
-
-    element.appendChild(child);
-  });
-
-  return element;
+export function allowDrop(ev) {
+  ev.preventDefault();
 }
 
-class EventEmitter {
-  constructor() {
-    this.events = {};
-  }
-
-  on(type, listener) {
-    this.events[type] = this.events[type] || [];
-    this.events[type].push(listener);
-  }
-
-  emit(type, arg) {
-    if (this.events[type]) {
-      this.events[type].forEach(listener => listener(arg));
-    }
-  }
+export function drag(ev) {
+  ev.dataTransfer.setData('text', ev.target.id);
 }
-export { createElement, EventEmitter };
+
+export function drop(ev) {
+  ev.preventDefault();
+  const data = ev.dataTransfer.getData('text');
+  if (!ev.target.childNodes.length) ev.target.appendChild(document.getElementById(data));
+}
+export function addDrag(item) {
+  item.setAttribute('draggable', 'true');
+  item.addEventListener('dragstart', drag);
+}
+export function findFreeCell(list) {
+  return Array.from(list).find(cell => !cell.childNodes.length);
+}
+export function createListItem(item) {
+  const newItem = document.createElement('p');
+  newItem.id = item.id;
+  newItem.textContent = item.name;
+  addDrag(newItem);
+  return newItem;
+}
