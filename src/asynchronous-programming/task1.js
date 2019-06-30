@@ -10,3 +10,4 @@ function foo(x, cb) {
 const cb = str => () => console.log(str);
 
 foo(5, cb('cb'));
+foo(13, cb('cb'));
