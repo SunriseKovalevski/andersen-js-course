@@ -10,14 +10,26 @@ const fetchJson = async url => {
   return response.json();
 };
 
-const parallel = async () => {
+const line = async () => {
   const firstData = await fetchJson(first);
   const secondData = await fetchJson(second);
   const thirdData = await fetchJson(third);
   const fourData = await fetchJson(four);
   const fiveData = await fetchJson(five);
 
-  console.log(firstData, secondData, thirdData, fourData, fiveData);
+  console.log([firstData, secondData, thirdData, fourData, fiveData]);
 };
 
+const parallel = () =>
+  Promise.all([
+    fetchJson(first),
+    fetchJson(second),
+    fetchJson(third),
+    fetchJson(four),
+    fetchJson(five),
+  ]).then(data => {
+    console.log(data);
+  });
+
+line();
 parallel();
