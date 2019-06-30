@@ -5,7 +5,7 @@ function ifGetUsersFromRequest() {
       if (getUsersData) {
         fetch('http://www.json-generator.com/api/json/get/cfVGucaXPC')
           .then(response => response.json())
-          .then(result => console.log(result));
+          .then(res => console.log(res));
       }
     });
 }
