@@ -1,4 +1,4 @@
-function getUsers() {
+function ifGetUsersFromRequest() {
   fetch('http://www.json-generator.com/api/json/get/cfQCylRjuG')
     .then(response => response.json())
     .then(({ getUsersData }) => {
@@ -10,4 +10,4 @@ function getUsers() {
     });
 }
 
-getUsers();
+ifGetUsersFromRequest();
