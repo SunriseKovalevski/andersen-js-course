@@ -1,4 +1,3 @@
-import './styles/main.css';
 import express from 'express';
 
 const app = express();
