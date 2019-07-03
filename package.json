@@ -11,7 +11,7 @@
     "lint": "eslint --debug src/",
     "lint:write": "eslint --debug src/ --fix",
     "prettier": "prettier --write src/**/*.js",
-    "server:start": "nodemon src/server/index.js"
+    "server:start": "nodemon -r esm src/server/index.js"
   },
   "husky": {
     "hooks": {
@@ -49,6 +49,7 @@
     "webpack-dev-server": "^3.5.0"
   },
   "dependencies": {
+    "babel-install": "^2.1.0",
     "express": "^4.17.1",
     "nodemon": "^1.19.1"
   }
