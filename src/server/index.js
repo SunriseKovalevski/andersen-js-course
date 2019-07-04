@@ -2,10 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { connectDb } from './models';
+
 import routes from './routes';
 
 const app = express();
-const PORT = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 
@@ -24,5 +25,5 @@ app.use('/products', routes.products);
     console.error(error);
   }
 
-  app.listen(3000, () => console.log(`Example app listening on port ${PORT}!`));
+  app.listen(port, () => console.log(`Andersen listening on port ${port}!`));
 })();

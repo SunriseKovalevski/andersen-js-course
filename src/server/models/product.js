@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema(
     height: { type: Number },
     weight: { type: Number },
   },
-  { collection: 'mattresses' }
+  { collection: 'penTablets' }
 );
 
 const Product = mongoose.model('Product', productSchema);
