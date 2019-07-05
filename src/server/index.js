@@ -35,6 +35,7 @@ app.post('/penTablets', (req, res) => {
   res.send('opa');
 });
 
-app.get('/penTablets', (req, res) => {
-  res.send('Hello from get');
+app.get('/penTablets', async (req, res) => {
+  const products = await Product.find();
+  return res.send(products);
 });
