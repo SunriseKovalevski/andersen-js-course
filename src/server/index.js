@@ -39,3 +39,8 @@ app.get('/penTablets', async (req, res) => {
   const products = await Product.find();
   return res.send(products);
 });
+
+app.delete('/:id', async (req, res) => {
+  const result = await Product.deleteOne({ link: req.params.id });
+  return res.send(result);
+});

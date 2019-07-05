@@ -19,6 +19,14 @@ productSchema.statics.findByModele = async function(modele) {
   return product;
 };
 
+productSchema.statics.findByLink = async function(link) {
+  const product = await this.findOne({
+    link,
+  });
+
+  return product;
+};
+
 const Product = mongoose.model('Product', productSchema);
 
 export default Product;
