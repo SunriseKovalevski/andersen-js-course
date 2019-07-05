@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema(
@@ -9,6 +10,14 @@ const productSchema = new mongoose.Schema(
   },
   { collection: 'penTablets' }
 );
+
+productSchema.statics.findByModele = async function(modele) {
+  const product = await this.findOne({
+    modele,
+  });
+
+  return product;
+};
 
 const Product = mongoose.model('Product', productSchema);
 
