@@ -27,3 +27,12 @@ app.use('/products', routes.products);
 
   app.listen(port, () => console.log(`Andersen listening on port ${port}!`));
 })();
+
+app.post('/penTablets', (req, res) => {
+  res.send(req.body);
+  res.send('Hello from postz');
+});
+
+app.get('/penTablets', (req, res) => {
+  res.send('Hello from get');
+});
