@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import Product from './models/product';
 import { connectDb } from './models';
 
 import routes from './routes';
@@ -29,8 +30,9 @@ app.use('/products', routes.products);
 })();
 
 app.post('/penTablets', (req, res) => {
-  res.send(req.body);
-  res.send('Hello from postz');
+  const product = new Product({ ...req.body });
+  product.save();
+  res.send('opa');
 });
 
 app.get('/penTablets', (req, res) => {
