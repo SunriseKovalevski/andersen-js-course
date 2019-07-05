@@ -44,3 +44,8 @@ app.delete('/:id', async (req, res) => {
   const result = await Product.deleteOne({ link: req.params.id });
   return res.send(result);
 });
+
+app.put('/:id', async (req, res) => {
+  const product = await Product.findOneAndUpdate({ link: req.params.id }, { ...req.body });
+  return res.send(product);
+});
