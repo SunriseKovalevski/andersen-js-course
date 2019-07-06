@@ -1,5 +1,5 @@
-import products from './products';
+import tablets from './tablets';
 
 export default {
-  products,
+  tablets,
 };

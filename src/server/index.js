@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import Product from './models/product';
 import { connectDb } from './models';
 
 import routes from './routes';
@@ -17,7 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
-app.use('/products', routes.products);
+
+app.use('/tablets', routes.tablets);
 
 (async () => {
   try {
@@ -28,24 +28,3 @@ app.use('/products', routes.products);
 
   app.listen(port, () => console.log(`Andersen listening on port ${port}!`));
 })();
-
-app.post('/penTablets', (req, res) => {
-  const product = new Product({ ...req.body });
-  product.save();
-  res.send('opa');
-});
-
-app.get('/penTablets', async (req, res) => {
-  const products = await Product.find();
-  return res.send(products);
-});
-
-app.delete('/:id', async (req, res) => {
-  const result = await Product.deleteOne({ link: req.params.id });
-  return res.send(result);
-});
-
-app.put('/:id', async (req, res) => {
-  const product = await Product.findOneAndUpdate({ link: req.params.id }, { ...req.body });
-  return res.send(product);
-});
