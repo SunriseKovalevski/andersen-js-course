@@ -4,13 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/server/index.js',
+  entry: ['./src/client/index.js', './src/client/styles/main.css'],
   output: {
+    publicPath: '/',
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: path.join(__dirname, 'dist'),
+    historyApiFallback: true,
   },
   module: {
     rules: [
