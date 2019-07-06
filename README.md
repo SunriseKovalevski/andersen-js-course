@@ -7,5 +7,3 @@ localhost:8080
 
 server: npm run server:start
 localhost:3000
-
-all: start:app

@@ -1,9 +1,13 @@
 export default class Tablet {
-  constructor() {
-    this.container = document.getElementById('app');
+  constructor(model, url, container) {
+    this.model = model;
+    this.container = container;
+    this.url = url;
   }
 
   async render() {
-    this.container.innerHTML = `<div>Tablet</div>`;
+    const tablet = await this.model.getTablet(this.url);
+
+    this.container.innerHTML = `<div>${tablet.title}</div>`;
   }
 }

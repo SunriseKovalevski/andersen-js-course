@@ -1,61 +1,56 @@
 import UrlPattern from 'url-pattern';
 import fetch from 'unfetch';
+import { createBrowserHistory } from 'history';
 import Home from './views/Home';
 import Catalog from './views/Catalog';
 import Tablet from './views/Tablet';
 import TabletModel from './TabletModel';
 import TabletController from './TabletController';
 
-// Добавить 404 страницу если не сматчилось
+const container = window.document.getElementById('app');
+const history = createBrowserHistory();
+const ROUTER_LINK_CSS = 'client-router';
+
+const tablets = new TabletModel(fetch);
+
 const mathPages = pathname => {
   const mainPage = {
     url: new UrlPattern('/'),
     view: Home,
-    model() {},
-    controller() {},
+    model: () => {},
+    controller: () => {},
   };
   const tabletsPage = {
     url: new UrlPattern('/tablets'),
     view: Catalog,
-    model: TabletModel,
+    model: tablets,
     controller: TabletController,
   };
   const tabletPage = {
     url: new UrlPattern('/tablets(/:id)'),
     view: Tablet,
+    model: tablets,
+    controller: TabletController,
   };
 
   return [mainPage, tabletsPage, tabletPage].filter(({ url }) => url.match(pathname))[0];
 };
 
-const router = async () => {
-  const { view: View, model: Model } = mathPages(window.location.pathname);
-  const pageModel = new Model(fetch);
-  const pageView = new View(
-    pageModel,
-    window.location.pathname,
-    window.document.getElementById('app')
-  );
-
+history.listen(async location => {
+  const { view: View, model: pageModel } = mathPages(location.pathname);
+  const pageView = new View(pageModel, location.pathname, container);
   await pageView.render();
-};
+});
 
-// Listen on hash change:
-window.addEventListener('pushState', router);
+window.addEventListener('click', e => {
+  if (e.target.matches('a') && e.target.classList.contains(ROUTER_LINK_CSS)) {
+    const href = e.target.getAttribute('href');
+    // local url
+    if (href.startsWith('/')) {
+      history.push(href);
+      e.preventDefault();
+    }
+  }
+});
 
-// Listen on page load:
-window.addEventListener('load', router);
-
-function initClientRouterLinks() {
-  const links = window.document.querySelectorAll('.client-router');
-  links.forEach(link =>
-    link.addEventListener('click', ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      window.history.pushState('', '', ev.target.href);
-      router();
-    })
-  );
-}
-
-initClientRouterLinks();
+window.addEventListener('load', () => history.push(window.location.pathname));

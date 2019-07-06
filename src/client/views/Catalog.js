@@ -7,9 +7,15 @@ export default class Catalog {
 
   async render() {
     await this.model.getAllTablets(this.url);
-    console.log(this.model.tablets);
-    this.container.innerHTML = `<div>
-      ${this.model.tablets.map(tablet => `<div>${tablet.title}</div>`).join('')}
-    </div>`;
+    this.container.innerHTML = `<div>${this.model.tablets
+      .map(
+        tablet =>
+          `<div><a class="nav-link client-router" href="/tablets/${tablet.link}">${
+            tablet.title
+          }</a></div>
+      `
+      )
+      .join('')}
+      </div>`;
   }
 }

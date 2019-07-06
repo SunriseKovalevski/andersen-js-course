@@ -5,6 +5,16 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h1 {
+h1,
+h4 {
   text-align: center;
+}
+
+.product-thumb {
+  border: 1px solid #ddd;
+  text-align: center;
+  float: left;
+}
+.row {
+  display: block;
 }
