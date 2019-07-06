@@ -8,7 +8,6 @@ const router = Router();
 router.get('/', async (req, res) => {
   try {
     const tablets = await Tablet.find();
-
     return res.send(tablets);
   } catch (err) {
     return res.status(500).send('Something broke!');

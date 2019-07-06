@@ -4,10 +4,13 @@ import mongoose from 'mongoose';
 // Заполнить базу, добавить норм полей
 const tabletSchema = new mongoose.Schema(
   {
-    modele: { type: String },
+    title: { type: String },
     link: { type: String },
-    height: { type: Number },
-    weight: { type: Number },
+    color: { type: String },
+    sensitivityLvls: { type: Number },
+    resolution: { type: Number },
+    cost: { type: Number },
+    image: { type: String },
   },
   { collection: 'penTablets' }
 );
