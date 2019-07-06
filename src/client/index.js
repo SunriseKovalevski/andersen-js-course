@@ -9,7 +9,6 @@ import TabletController from './TabletController';
 
 const container = window.document.getElementById('app');
 const history = createBrowserHistory();
-const ROUTER_LINK_CSS = 'client-router';
 
 const tablets = new TabletModel(fetch);
 
@@ -43,7 +42,7 @@ history.listen(async location => {
 });
 
 window.addEventListener('click', e => {
-  if (e.target.matches('a') && e.target.classList.contains(ROUTER_LINK_CSS)) {
+  if (e.target.matches('a')) {
     const href = e.target.getAttribute('href');
     // local url
     if (href.startsWith('/')) {

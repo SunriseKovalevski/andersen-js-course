@@ -1,5 +1,6 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-else-return */
+/* eslint-disable no-empty-function */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-unused-vars */
 import EventEmitter from './EventEmmiter';
 
 export default class TabletModel extends EventEmitter {
@@ -25,13 +26,26 @@ export default class TabletModel extends EventEmitter {
           .join('')
     );
 
-    if (tablet) {
-      return tablet;
-    } else {
-      const response = await this.fetch(`http://localhost:3000${url}`);
-      const tablet = await response.json();
+    if (tablet) return tablet;
 
-      return tablet;
-    }
+    const response = await this.fetch(`http://localhost:3000${url}`);
+    const data = await response.json();
+
+    return data;
   }
+
+  async addNewTablet(tablet) {
+    const response = await this.fetch('http://localhost:3000/tablets', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: tablet,
+    });
+
+    const content = await response.json();
+  }
+
+  async deleteTablet() {}
 }
