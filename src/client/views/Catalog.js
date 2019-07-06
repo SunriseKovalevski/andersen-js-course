@@ -1,10 +1,15 @@
 export default class Catalog {
-  constructor() {
-    this.container = document.getElementById('app');
-    //  this.url = 'url_be-side-app-all-tablets';
+  constructor(model, url, container) {
+    this.model = model;
+    this.container = container;
+    this.url = url;
   }
 
   async render() {
-    this.container.innerHTML = `<div>Catalog</div>`;
+    await this.model.getAllTablets(this.url);
+    console.log(this.model.tablets);
+    this.container.innerHTML = `<div>
+      ${this.model.tablets.map(tablet => `<div>${tablet.title}</div>`).join('')}
+    </div>`;
   }
 }
