@@ -7,11 +7,13 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack",
+    "build": "webpack --mode=production",
     "lint": "eslint --debug src/",
     "lint:write": "eslint --debug src/ --fix",
     "prettier": "prettier --write src/**/*.js",
-    "server:start": "nodemon -r esm src/server/index.js"
+    "start:app": "npm run server:start && npm run client:start",
+    "server:start": "nodemon -r esm src/server/index.js",
+    "client:start": "npm run build && node -r esm src/client/server.js"
   },
   "husky": {
     "hooks": {
