@@ -52,6 +52,7 @@
     "webpack-dev-server": "^3.5.0"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.1",
     "babel-install": "^2.1.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
