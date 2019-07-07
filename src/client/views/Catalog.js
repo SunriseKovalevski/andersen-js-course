@@ -1,22 +1,36 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-unused-vars */
-export default class Catalog {
+import EventEmitter from '../EventEmmiter';
+import { createButton, createInput, extendValuesFromInputs } from '../utils';
+
+export default class Catalog extends EventEmitter {
   constructor(model, url, container) {
+    super(model, url, container);
     this.model = model;
     this.container = container;
     this.url = url;
   }
 
-  renderAddButton(tablet) {
-    //    this.model.addNewTablet(tablet);
-    const button = document.createElement('button');
-    button.classList.add('btn', 'btn-primary');
-    button.innerHTML = 'Add Tablet';
-    button.addEventListener('click', () => console.log('click'));
-    this.container.appendChild(button);
+  addTablet(inputs) {
+    this.emit('addTablet', extendValuesFromInputs(inputs));
   }
 
-  renderAddForm() {}
+  renderAddForm() {
+    const formContainer = document.createElement('div');
+    const inputsTitle = [
+      'title',
+      'link',
+      'color',
+      'sensitivityLvls',
+      'resolution',
+      'cost',
+      'image',
+    ];
+    const inputs = inputsTitle.map(input => createInput({ id: input, placeholder: input }));
+    const button = createButton('Add Tablet', ['btn', 'btn-primary']);
+    button.addEventListener('click', () => this.addTablet(inputs));
+    inputs.forEach(el => formContainer.appendChild(el));
+    formContainer.appendChild(button);
+    this.container.appendChild(formContainer);
+  }
 
   async render() {
     await this.model.getAllTablets(this.url);
@@ -37,6 +51,6 @@ export default class Catalog {
       )
       .join('')}
       </div></div>`;
-    this.renderAddButton();
+    this.renderAddForm();
   }
 }

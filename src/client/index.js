@@ -36,9 +36,10 @@ const mathPages = pathname => {
 };
 
 history.listen(async location => {
-  const { view: View, model: pageModel } = mathPages(location.pathname);
-  const pageView = new View(pageModel, location.pathname, container);
-  await pageView.render();
+  const { view: View, model: pageModel, controller: Controller } = mathPages(location.pathname);
+  const pageView = new View(pageModel, location.pathname, container, history);
+  const pageController = new Controller(pageModel, pageView);
+  await pageView.render(pageController);
 });
 
 window.addEventListener('click', e => {

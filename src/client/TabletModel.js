@@ -1,11 +1,8 @@
-/* eslint-disable no-empty-function */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-unused-vars */
 import EventEmitter from './EventEmmiter';
 
 export default class TabletModel extends EventEmitter {
   constructor(fetch, items) {
-    super();
+    super(fetch, items);
     this.fetch = fetch;
     this.tablets = items || [];
   }
@@ -41,11 +38,29 @@ export default class TabletModel extends EventEmitter {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: tablet,
+      body: JSON.stringify(tablet),
     });
-
-    const content = await response.json();
+    return response;
   }
 
-  async deleteTablet() {}
+  async deleteTablet(tabletUrl) {
+    const response = await this.fetch(`http://localhost:3000${tabletUrl}`, {
+      method: 'DELETE',
+    });
+
+    return response;
+  }
+
+  async updateTablet(tabletUrl, tablet) {
+    const response = await this.fetch(`http://localhost:3000${tabletUrl}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(tablet),
+    });
+
+    return response;
+  }
 }
