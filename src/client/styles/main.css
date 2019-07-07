@@ -5,7 +5,10 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-h1,
-h4 {
+h1 {
   text-align: center;
+}
+
+#app {
+  margin: 50px auto;
 }
